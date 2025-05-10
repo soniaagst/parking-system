@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingSystem.Domain", "ParkingSystem.Domain\ParkingSystem.Domain.csproj", "{D0408818-F750-4EC9-8E4A-293A534A2CA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingSystem.API", "ParkingSystem.API\ParkingSystem.API.csproj", "{BDE7F109-13E3-4D75-B7FA-E2061BAEA09D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingSystem.Tests", "ParkingSystem.Tests\ParkingSystem.Tests.csproj", "{3295B36D-6AAC-4953-AA6D-6E741D4FB3F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingSystem.Persistence", "ParkingSystem.Persistence\ParkingSystem.Persistence.csproj", "{D243184D-535A-4395-A050-DE8E8D9E61B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingSystem.Application", "ParkingSystem.Application\ParkingSystem.Application.csproj", "{99F88675-165B-4BF1-9B7A-FB8BABBFFC15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0408818-F750-4EC9-8E4A-293A534A2CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0408818-F750-4EC9-8E4A-293A534A2CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0408818-F750-4EC9-8E4A-293A534A2CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0408818-F750-4EC9-8E4A-293A534A2CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDE7F109-13E3-4D75-B7FA-E2061BAEA09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE7F109-13E3-4D75-B7FA-E2061BAEA09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE7F109-13E3-4D75-B7FA-E2061BAEA09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE7F109-13E3-4D75-B7FA-E2061BAEA09D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3295B36D-6AAC-4953-AA6D-6E741D4FB3F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3295B36D-6AAC-4953-AA6D-6E741D4FB3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3295B36D-6AAC-4953-AA6D-6E741D4FB3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3295B36D-6AAC-4953-AA6D-6E741D4FB3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D243184D-535A-4395-A050-DE8E8D9E61B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D243184D-535A-4395-A050-DE8E8D9E61B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D243184D-535A-4395-A050-DE8E8D9E61B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D243184D-535A-4395-A050-DE8E8D9E61B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F88675-165B-4BF1-9B7A-FB8BABBFFC15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F88675-165B-4BF1-9B7A-FB8BABBFFC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F88675-165B-4BF1-9B7A-FB8BABBFFC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F88675-165B-4BF1-9B7A-FB8BABBFFC15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
