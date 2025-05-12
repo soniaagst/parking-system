@@ -9,8 +9,8 @@ public class RegisterVehicleValidator : AbstractValidator<RegisterVehicleRequest
     {
         RuleFor(v => v.LicensePlate)
             .NotEmpty().WithMessage("License plate is required.")
-            .Matches(@"^[A-Z]{1,2}[0-9]{4}[A-Z]{1,2}$")
-            .WithMessage("License plate format: XX1234XX.");
+            .Matches(@"^[A-Z]{1,2}\s[0-9]{4}\s[A-Z]{1,3}$")
+            .WithMessage("Format: [Region Code] [Numbers] [Letters] | Example: AB 1234 XYZ");
 
         RuleFor(v => v.Owner)
             .NotEmpty().WithMessage("Owner name is required.")
