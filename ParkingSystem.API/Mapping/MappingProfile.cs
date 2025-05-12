@@ -8,7 +8,8 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Vehicle, VehicleDto>();
+        CreateMap<Vehicle, VehicleDto>()
+            .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner.Username));
 
         CreateMap<Ticket, TicketDto>();
 
