@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using ParkingSystem.Domain.Models;
 using ParkingSystem.Persistence.Data;
 using ParkingSystem.Persistence.Repositories.Interfaces;
@@ -16,7 +15,7 @@ public class VehicleRepository : Repository<Vehicle>, IVehicleRepository
 
     public async Task<Vehicle?> FindByLicensePlateAsync(string licensePlate)
     {
-        return await _dbContext.Vehicles.FirstOrDefaultAsync(vhcl => vhcl.LicensePlate == licensePlate);
+        return await FindFirstAsync(vhcl => vhcl.LicensePlate == licensePlate, propertiesToInclude: "Owner");
     }
 
     public async Task UpdateVehicleOwnerAsync(Vehicle vehicle, User newOwner)

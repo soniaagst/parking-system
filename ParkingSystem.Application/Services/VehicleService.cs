@@ -29,7 +29,7 @@ public class VehicleService : IVehicleService
 
     public async Task<List<Vehicle>> GetAllVehiclesAsync()
     {
-        return await _vehicleRepository.GetAllAsync();
+        return await _vehicleRepository.GetAllAsync(propertiesToInclude: "Owner");
     }
 
     public async Task<Vehicle?> FindByLicensePlateAsync(string licensePlate)
@@ -39,7 +39,7 @@ public class VehicleService : IVehicleService
 
     public async Task<List<Vehicle>> FindByOwnerAsync(string ownerName)
     {
-        return await _vehicleRepository.FindAllAsync(v => v.Owner.Username == ownerName);
+        return await _vehicleRepository.FindAllAsync(v => v.Owner.Username == ownerName, propertiesToInclude: "Owner");
     }
 
     public async Task<Result<bool>> EditVehicleOwnerAsync(string licensePlate, string newOwnerName)
@@ -48,7 +48,7 @@ public class VehicleService : IVehicleService
         var newOwner = await _userRepository.FindByUsernameAsync(newOwnerName);
 
         if (vehicle is null) return new Result<bool>(false, "Vehicle not found.");
-        if (newOwner is null) return new Result<bool>(false, "User with this username is not found.");
+        if (newOwner is null) return new Result<bool>(false, $"User with username {newOwnerName} is not found.");
         
         await _vehicleRepository.UpdateVehicleOwnerAsync(vehicle, newOwner);
         return new Result<bool>(true, "Owner update success.");

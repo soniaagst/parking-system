@@ -28,24 +28,36 @@ public class Repository<T> : IRepository<T> where T : class
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<List<T>> GetAllAsync()
+    public async Task<List<T>> GetAllAsync(string? propertiesToInclude = null)
     {
-        return await _dbSet.ToListAsync();
+        IQueryable<T> entities = _dbSet;
+        if (propertiesToInclude is not null)
+            entities = IncludeProperties(entities, propertiesToInclude);
+        return await entities.ToListAsync();
     }
 
-    public async Task<T?> FindByIdAsync(Guid id)
+    public async Task<T?> FindByIdAsync(Guid id, string? propertiesToInclude = null)
     {
+        IQueryable<T> entities = _dbSet;
+        if (propertiesToInclude is not null)
+            entities = IncludeProperties(entities, propertiesToInclude);
         return await _dbSet.FindAsync(id);
     }
 
-    public async Task<List<T>> FindAllAsync(Expression<Func<T, bool>> expression)
+    public async Task<List<T>> FindAllAsync(Expression<Func<T, bool>> expression, string? propertiesToInclude = null)
     {
-        return await _dbSet.Where(expression).ToListAsync();
+        IQueryable<T> entities = _dbSet;
+        if (propertiesToInclude is not null)
+            entities = IncludeProperties(entities, propertiesToInclude);
+        return await entities.Where(expression).ToListAsync();
     }
 
-    public async Task<T?> FindFirstAsync(Expression<Func<T, bool>> expression)
+    public async Task<T?> FindFirstAsync(Expression<Func<T, bool>> expression, string? propertiesToInclude = null)
     {
-        return await _dbSet.FirstOrDefaultAsync(expression);
+        IQueryable<T> entities = _dbSet;
+        if (propertiesToInclude is not null)
+            entities = IncludeProperties(entities, propertiesToInclude);
+        return await entities.FirstOrDefaultAsync(expression);
     }
 
     public async Task UpdateAsync(T entity)
