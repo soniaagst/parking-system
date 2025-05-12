@@ -18,8 +18,8 @@ public static class DbInitializer
         {
             User adminUser = new("admin", "$2a$11$UVu01etRZTQnGGGdxQFIRexZfDcpS5ExvI7AIJgr65G6ECGseQBsC", UserRole.Admin);
             User member = new("naruto", "$2a$11$iraOS.gEFeFsKwQ4kw9Wpe9UTpiQPRT85hi0HFpwKifKX1Y1WMwJm", UserRole.Member);
-            Vehicle car = new("A4444A", VehicleType.Car, member);
-            Vehicle bike = new("K1412K", VehicleType.Motorcycle, adminUser);
+            Vehicle car = new("A 4444 A", VehicleType.Car, member);
+            Vehicle bike = new("K 1412 K", VehicleType.Motorcycle, adminUser);
 
             dbContext.Users.AddRange(adminUser, member);
             dbContext.Vehicles.AddRange(car, bike);
