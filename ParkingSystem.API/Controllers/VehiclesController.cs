@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ParkingSystem.API.DTOs;
 using ParkingSystem.API.DTOs.Requests;
-using ParkingSystem.Application.Common.Interfaces;
+using ParkingSystem.Application.Interfaces;
 using ParkingSystem.Domain.Models;
 
 namespace ParkingSystem.API.Controllers;
@@ -80,9 +80,9 @@ public class VehiclesController : ControllerBase
     {
         var result = await _vehicleService.EditVehicleOwnerAsync(licensePlate, newOwnerName);
 
-        if (result is true) return Ok("Owner name updated.");
+        if (result.Value is true) return Ok(result.Message);
 
-        return NotFound("Can't edit non-existing data.");
+        return NotFound(result.Message);
     }
 
     [HttpDelete]
@@ -91,7 +91,7 @@ public class VehiclesController : ControllerBase
     {
         var result = await _vehicleService.UnregVehicleAsync(licensePlate);
 
-        if (result is false) return NotFound("Can't delete non-existing data.");
+        if (result is false) return NotFound("Cannot delete non-existing vehicle.");
 
         else return Ok("Vehicle data permanently deleted.");
     }

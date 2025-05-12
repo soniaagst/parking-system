@@ -1,4 +1,4 @@
-using ParkingSystem.Application.Common.Interfaces;
+using ParkingSystem.Application.Interfaces;
 using ParkingSystem.Application.Helpers;
 using ParkingSystem.Domain.Enums;
 using ParkingSystem.Domain.Models;

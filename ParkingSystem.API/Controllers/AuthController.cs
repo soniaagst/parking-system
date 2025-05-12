@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ParkingSystem.API.DTOs.Requests;
 using ParkingSystem.API.Services.Auth;
-using ParkingSystem.Application.Common.Interfaces;
+using ParkingSystem.Application.Interfaces;
 
 namespace ParkingSystem.API.Controllers;
 

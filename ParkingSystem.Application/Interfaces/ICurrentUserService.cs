@@ -1,4 +1,4 @@
-namespace ParkingSystem.Application.Common.Interfaces;
+namespace ParkingSystem.Application.Interfaces;
 
 public interface ICurrentUserService
 {

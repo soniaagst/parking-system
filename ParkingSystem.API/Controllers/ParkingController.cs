@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ParkingSystem.API.DTOs;
-using ParkingSystem.Application.Common.Interfaces;
+using ParkingSystem.Application.Interfaces;
 using ParkingSystem.Domain.Models;
 
 namespace ParkingSystem.API.Controllers;
@@ -41,21 +41,21 @@ public class ParkingController : ControllerBase
 
         if (vehicle is null) return NotFound("Vehicle not registered.");
 
-        var response = await _parkingService.IssueTicketAsync(vehicle);
+        var ticketResponse = await _parkingService.IssueTicketAsync(vehicle);
 
-        if (response.Value is null) return NotFound(response.Message);
+        if (ticketResponse.Value is null) return NotFound(ticketResponse.Message);
 
-        return Ok(_mapper.Map<TicketDto>(response.Value));
+        return Ok(_mapper.Map<TicketDto>(ticketResponse.Value));
     }
 
     [HttpPost]
     [Route("/unpark")]
     public async Task<IActionResult> UnparkVehicle(string licensePlate, string ticketId)
     {
-        var fee = await _parkingService.ProcessExitAsync(licensePlate, Guid.Parse(ticketId));
+        var feeResponse = await _parkingService.ProcessExitAsync(licensePlate, Guid.Parse(ticketId));
 
-        if (fee is null) return BadRequest("Invalid ticket or vehicle not found.");
+        if (feeResponse.Value == 0) return BadRequest(feeResponse.Message);
 
-        return Ok($"Fee: {fee}");
+        return Ok(feeResponse.Message);
     }
 }

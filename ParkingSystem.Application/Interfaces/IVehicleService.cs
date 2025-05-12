@@ -1,7 +1,8 @@
+using ParkingSystem.Application.Helpers;
 using ParkingSystem.Domain.Enums;
 using ParkingSystem.Domain.Models;
 
-namespace ParkingSystem.Application.Common.Interfaces;
+namespace ParkingSystem.Application.Interfaces;
 
 public interface IVehicleService
 {
@@ -9,6 +10,6 @@ public interface IVehicleService
     Task<List<Vehicle>> GetAllVehiclesAsync();
     Task<Vehicle?> FindByLicensePlateAsync(string licensePlate);
     Task<List<Vehicle>> FindByOwnerAsync(string ownerName);
-    Task<bool> EditVehicleOwnerAsync(string licensePlate, string newOwnerName);
+    Task<Result<bool>> EditVehicleOwnerAsync(string licensePlate, string newOwnerName);
     Task<bool> UnregVehicleAsync(string licensePlate);
 }

@@ -1,4 +1,5 @@
-using ParkingSystem.Application.Common.Interfaces;
+using ParkingSystem.Application.Interfaces;
+using ParkingSystem.Application.Helpers;
 using ParkingSystem.Domain.Enums;
 using ParkingSystem.Domain.Models;
 using ParkingSystem.Persistence.Repositories.Interfaces;
@@ -41,15 +42,16 @@ public class VehicleService : IVehicleService
         return await _vehicleRepository.FindAllAsync(v => v.Owner.Username == ownerName);
     }
 
-    public async Task<bool> EditVehicleOwnerAsync(string licensePlate, string newOwnerName)
+    public async Task<Result<bool>> EditVehicleOwnerAsync(string licensePlate, string newOwnerName)
     {
         var vehicle = await _vehicleRepository.FindByLicensePlateAsync(licensePlate);
         var newOwner = await _userRepository.FindByUsernameAsync(newOwnerName);
 
-        if (vehicle is null || newOwner is null) return false;
+        if (vehicle is null) return new Result<bool>(false, "Vehicle not found.");
+        if (newOwner is null) return new Result<bool>(false, "User with this username is not found.");
         
         await _vehicleRepository.UpdateVehicleOwnerAsync(vehicle, newOwner);
-        return true;
+        return new Result<bool>(true, "Owner update success.");
     }
 
     public async Task<bool> UnregVehicleAsync(string licensePlate)

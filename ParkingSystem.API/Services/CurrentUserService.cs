@@ -1,4 +1,4 @@
-using ParkingSystem.Application.Common.Interfaces;
+using ParkingSystem.Application.Interfaces;
 using System.Security.Claims;
 
 namespace ParkingSystem.API.Services;

@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 using ParkingSystem.API.Services;
 using ParkingSystem.API.Services.Auth;
 using ParkingSystem.API.Validators;
-using ParkingSystem.Application.Common.Interfaces;
+using ParkingSystem.Application.Interfaces;
 using ParkingSystem.Application.Services;
 using ParkingSystem.Persistence.Data;
 using ParkingSystem.Persistence.Repositories;
