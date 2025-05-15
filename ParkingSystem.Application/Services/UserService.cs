@@ -14,9 +14,9 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async Task RegisterUserAsync(string username, string hashedPassword)
+    public async Task RegisterUserAsync(string username, string hashedPassword, UserRole role)
     {
-        User user = new User (username, hashedPassword, UserRole.Member);
+        User user = new User (username, hashedPassword, role);
 
         await _userRepository.AddAsync(user);
     }
