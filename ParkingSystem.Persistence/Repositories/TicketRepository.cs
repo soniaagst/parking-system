@@ -15,7 +15,7 @@ public class TicketRepository : Repository<Ticket>, ITicketRepository
 
     public async Task<List<Ticket>> GetActiveTicketsAsync()
     {
-        return await FindAllAsync(t => t.IsActive);
+        return await FindAllAsync(t => t.IsActive, propertiesToInclude: "Vehicle");
     }
 
     public async Task<Ticket?> FindActiveByLicenseAsync(string licensePlate)
