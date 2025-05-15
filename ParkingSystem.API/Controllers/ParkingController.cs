@@ -23,7 +23,7 @@ public class ParkingController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost]
+    [HttpPost] [Authorize(Roles = "Admin")]
     [Route("/gettingstarted")]
     public async Task<IActionResult> InitializeParkingLot(string name = "FmlxParkingArea", int carSlotCount = 60, int bikeSlotCount = 800)
     {
@@ -33,7 +33,7 @@ public class ParkingController : ControllerBase
         return BadRequest("Already initialized.");
     }
 
-    [HttpPost]
+    [HttpPost] [Authorize(Roles = "Admin,Guard")]
     [Route("/park")]
     public async Task<IActionResult> ParkVehicle(string licensePlate)
     {
@@ -48,7 +48,7 @@ public class ParkingController : ControllerBase
         return Ok(_mapper.Map<TicketDto>(ticketResponse.Value));
     }
 
-    [HttpPost]
+    [HttpPost] [Authorize(Roles = "Admin,Guard")]
     [Route("/unpark")]
     public async Task<IActionResult> UnparkVehicle(string licensePlate, string ticketId)
     {
