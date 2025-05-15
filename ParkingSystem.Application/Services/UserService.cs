@@ -35,11 +35,16 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task<bool> RemoveUserAsync(string username, string hashedPassword)
+    public async Task<List<User>> SearchUserAsync(string searchString)
+    {
+        return await _userRepository.FindAllAsync(u => u.Username.Contains(searchString));
+    }
+
+    public async Task<bool> RemoveUserAsync(string username)
     {
         var user = await FindByUsernameAsync(username);
 
-        if (user is not null && user.HashedPassword == hashedPassword)
+        if (user is not null)
         {
             await _userRepository.RemoveAsync(user);
             return true;

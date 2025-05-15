@@ -8,5 +8,6 @@ public interface IUserService
     Task RegisterUserAsync(string username, string hashedPassword, UserRole role);
     Task<List<User>> GetAllUsersAsync();
     Task<User?> FindByUsernameAsync(string username);
-    Task<bool> RemoveUserAsync(string username, string hashedPassword);
+    Task<List<User>> SearchUserAsync(string searchString);
+    Task<bool> RemoveUserAsync(string username);
 }
