@@ -22,7 +22,7 @@ public class VehiclesController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost] [Authorize(Roles = "Admin")]
+    [HttpPost]
     [Route("/registervehicle")]
     public async Task<IActionResult> RegisterVehicle([FromBody] RegisterVehicleRequestDto request)
     {
@@ -33,7 +33,7 @@ public class VehiclesController : ControllerBase
         return CreatedAtAction(nameof(SearchByLicensePlate), new { licensePlate = vehicleDto.LicensePlate }, vehicleDto);
     }
 
-    [HttpGet] [Authorize(Roles = "Admin,Guard")]
+    [HttpGet]
     [Route("/getallvehicle")]
     public async Task<IActionResult> GetAllVehicles()
     {
@@ -74,7 +74,7 @@ public class VehiclesController : ControllerBase
         return Ok(_mapper.Map<VehicleDto>(vehicle));
     }
 
-    [HttpPut] [Authorize(Roles = "Admin")]
+    [HttpPut]
     [Route("/editvehicleowner")]
     public async Task<IActionResult> EditVehicleOwner(string licensePlate, string newOwnerName)
     {
@@ -85,7 +85,7 @@ public class VehiclesController : ControllerBase
         return NotFound(result.Message);
     }
 
-    [HttpDelete] [Authorize(Roles = "Admin")]
+    [HttpDelete]
     [Route("/unregistervehicle")]
     public async Task<IActionResult> UnregVehicle(string licensePlate)
     {
