@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ParkingSystem.API.DTOs.Requests;
 using ParkingSystem.API.Services.Auth;
 using ParkingSystem.Application.Interfaces;
+using ParkingSystem.Domain.Enums;
 
 namespace ParkingSystem.API.Controllers;
 
@@ -27,7 +28,7 @@ public class AuthController : ControllerBase
 
         string hashedPassword = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
 
-        await _userService.RegisterUserAsync(username: registerDto.Username, hashedPassword: hashedPassword);
+        await _userService.RegisterUserAsync(username: registerDto.Username, hashedPassword: hashedPassword, role: UserRole.Member);
 
         return Ok("User registered successfully.");
     }
