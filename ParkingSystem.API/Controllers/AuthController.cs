@@ -18,7 +18,8 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("Register")]
+    [HttpPost]
+    [Route("/Register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDTO registerDto)
     {
         var existingUser = await _userService.FindByUsernameAsync(registerDto.Username);
@@ -31,7 +32,8 @@ public class AuthController : ControllerBase
         return Ok("User registered successfully.");
     }
 
-    [HttpPost("Login")]
+    [HttpPost]
+    [Route("/Login")]
     public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequest)
     {
         var user = await _userService.FindByUsernameAsync(loginRequest.Username);
