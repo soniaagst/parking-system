@@ -9,21 +9,23 @@ using ParkingSystem.Domain.Models;
 
 namespace ParkingSystem.API.Controllers;
 
-[Authorize(Roles = "Admin")]
+[Authorize]
 [ApiController]
 [Route("api/users")]
 public class UsersController : ControllerBase
 {
+    private readonly ICurrentUserService _currentUserService;
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
 
-    public UsersController(IUserService userService, IMapper mapper)
+    public UsersController(ICurrentUserService currentUserService, IUserService userService, IMapper mapper)
     {
+        _currentUserService = currentUserService;
         _userService = userService;
         _mapper = mapper;
     }
 
-    [HttpPost]
+    [HttpPost] [Authorize(Roles = "Admin")]
     [Route("/createuser")]
     public async Task<IActionResult> CreateUser([FromBody] RegisterRequestDTO registerRequestDto, UserRole userRole)
     {
@@ -37,7 +39,7 @@ public class UsersController : ControllerBase
         return Ok("User registered successfully.");
     }
 
-    [HttpGet]
+    [HttpGet] [Authorize(Roles = "Admin")]
     [Route("/showalluser")]
     public async Task<IActionResult> ShowAllUsers()
     {
@@ -52,7 +54,7 @@ public class UsersController : ControllerBase
         return Ok(userDtos);
     }
 
-    [HttpGet]
+    [HttpGet] [Authorize(Roles = "Admin,Guard")]
     [Route("/searchuser")]
     public async Task<IActionResult> SearchUser(string searchString)
     {
@@ -60,11 +62,15 @@ public class UsersController : ControllerBase
 
         if (users.Count == 0)
             return NotFound("No match found.");
+        
+        if (_currentUserService.Role == UserRole.Admin.ToString())
+            return Ok(users);
 
-        return Ok(users);
+        List<UserDto> userDtos = users.Select(_mapper.Map<UserDto>).ToList();;
+        return Ok(userDtos);
     }
 
-    [HttpDelete]
+    [HttpDelete] [Authorize(Roles = "Admin")]
     [Route("/deleteuser")]
     public async Task<IActionResult> DeleteUser(string username, string password)
     {
