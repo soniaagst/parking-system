@@ -6,7 +6,7 @@ namespace ParkingSystem.Application.Interfaces;
 
 public interface IVehicleService
 {
-    Task<Vehicle?> RegisterVehicleAsync(VehicleType vehicleType, string licensePlate, string owner);
+    Task<Result<Vehicle>> RegisterVehicleAsync(VehicleType vehicleType, string licensePlate, string owner);
     Task<List<Vehicle>> GetAllVehiclesAsync();
     Task<Vehicle?> FindByLicensePlateAsync(string licensePlate);
     Task<List<Vehicle>> FindByOwnerAsync(string ownerName);

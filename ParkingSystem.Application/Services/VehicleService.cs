@@ -17,14 +17,19 @@ public class VehicleService : IVehicleService
         _userRepository = userRepository;
     }
 
-    public async Task<Vehicle?> RegisterVehicleAsync(VehicleType vehicleType, string licensePlate, string ownerUsername)
+    public async Task<Result<Vehicle>> RegisterVehicleAsync(VehicleType vehicleType, string licensePlate, string ownerUsername)
     {
+        Vehicle? existingVehicle = await _vehicleRepository.FindByLicensePlateAsync(licensePlate);
+        if (existingVehicle is not null)
+            return new Result<Vehicle>(null, $"Vehicle with license plate <{licensePlate}> already exist.");
+
         User? owner = await _userRepository.FindByUsernameAsync(ownerUsername);
-        if (owner is null) return null;
+        if (owner is null)
+            return new Result<Vehicle>(null, $"No user with username <{ownerUsername}> found.");
         
-        Vehicle vehicle = new Vehicle(licensePlate, vehicleType, owner);
+        Vehicle vehicle = new(licensePlate, vehicleType, owner);
         await _vehicleRepository.AddAsync(vehicle);
-        return vehicle;
+        return new Result<Vehicle>(vehicle, "Vehicle registered successfully.");
     }
 
     public async Task<List<Vehicle>> GetAllVehiclesAsync()

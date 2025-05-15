@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ParkingSystem.API.DTOs;
 using ParkingSystem.API.DTOs.Requests;
+using ParkingSystem.Application.Helpers;
 using ParkingSystem.Application.Interfaces;
 using ParkingSystem.Domain.Models;
 
@@ -26,9 +27,10 @@ public class VehiclesController : ControllerBase
     [Route("/registervehicle")]
     public async Task<IActionResult> RegisterVehicle([FromBody] RegisterVehicleRequestDto request)
     {
-        var vehicle = await _vehicleService.RegisterVehicleAsync(request.Type, request.LicensePlate, request.Owner);
+        Result<Vehicle> result = await _vehicleService.RegisterVehicleAsync(request.Type, request.LicensePlate, request.Owner);
+        if (result.Value is null) return BadRequest(result.Message);
 
-        VehicleDto vehicleDto = _mapper.Map<VehicleDto>(vehicle);
+        VehicleDto vehicleDto = _mapper.Map<VehicleDto>(result.Value);
 
         return CreatedAtAction(nameof(SearchByLicensePlate), new { licensePlate = vehicleDto.LicensePlate }, vehicleDto);
     }
