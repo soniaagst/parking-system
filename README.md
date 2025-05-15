@@ -4,7 +4,7 @@ This application is for internal parking system of an instance, company, org, et
 Navigate to ParkingSystem.API and run. It automatically creates .db at the first run.
 
 ---
-    Users Seed
+Users Seed
 Username | Password
 -------- | --------
 admin    | admin
