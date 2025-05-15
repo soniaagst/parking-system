@@ -5,10 +5,11 @@ Navigate to ParkingSystem.API and run. It automatically creates .db at the first
 
 ---
 Users Seed
-Username | Password
--------- | --------
-admin    | admin
-naruto   | dattebayo
+Username | Password | Role
+-------- | -------- | --------
+admin    | admin    | Admin
+jukir    | parkir2k | Guard
+naruto   | dattebayo| Member
 
 ---
 How to add new migrations from ParkingSystem.API:
